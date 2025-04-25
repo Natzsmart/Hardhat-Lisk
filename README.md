@@ -1,13 +1,28 @@
-# Sample Hardhat Project
+# Hardhat Deployment on Lisk Sepolia
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a Hardhat Ignition module that deploys that contract.
+This project uses Hardhat to compile, test, and deploy a Solidity smart contract to the Lisk Sepolia Testnet.
 
-Try running some of the following tasks:
+## 📦 Setup
+```bash
+npm install
+npx hardhat compile
 
-```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat ignition deploy ./ignition/modules/Lock.js
-```
+🔧 Config
+In hardhat.config.js, setup:
+networks: {
+  lisk: {
+    url: "https://rpc-sepolia.lisk.com",
+    accounts: [process.env.PRIVATE_KEY],
+  },
+}
+
+Add a .env file:
+PRIVATE_KEY=your_metamask_private_key
+
+🚀 Deploy
+npx hardhat run scripts/deploy.js --network lisk
+🔗 Contract Address
+Deployed to: 0x...
+
+🔍 View on Blockscout
+[View on Lisk Blockscout]
