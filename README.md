@@ -19,10 +19,11 @@ networks: {
 Add a .env file:
 PRIVATE_KEY=your_metamask_private_key
 
-🚀 Deploy
+## 🚀 Deploy
 npx hardhat run scripts/deploy.js --network lisk
-🔗 Contract Address
+
+## 🔗 Contract Address
 Deployed to: 0x...
 
-🔍 View on Blockscout
+## 🔍 View on Blockscout
 [View on Lisk Blockscout](https://sepolia-blockscout.lisk.com/tx/0x23389178e01d0b3aff172a7ac92126e209f8d5206ae779e421ea898889bd6087)
