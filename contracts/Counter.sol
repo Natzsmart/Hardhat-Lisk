@@ -2,7 +2,7 @@
 pragma solidity ^0.8.20;
 
 contract Counter {
-    uint256 public count;
+    uint256 public count; // Counter state variable
 
     // Function to get the current count
     function get() public view returns (uint256) {
@@ -11,18 +11,18 @@ contract Counter {
 
     // Function to increment count by 1
     function inc() public {
-        count += 1;
+        count += 1; // Increment the counter
     }
 
     // Function to decrement count by 1
     function dec() public {
         // Prevent underflow
         require(count > 0, "Counter: cannot decrement below zero");
-        count -= 1;
+        count -= 1; // Decrement the counter
     }
 
     // Function to reset count to zero
     function reset() public {
-        count = 0;
+        count = 0; // Reset counter to zero
     }
 }

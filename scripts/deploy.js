@@ -1,29 +1,25 @@
-const hre = require("hardhat");
+const { ethers } = require("hardhat");
 
 async function main() {
-  console.log("Deploying to network:", hre.network.name);
+  const [deployer] = await ethers.getSigners();
+  console.log("Deploying contracts with the account:", deployer.address);
+  console.log("Account balance:", (await ethers.provider.getBalance(deployer.address)).toString());
 
-  const [deployer] = await hre.ethers.getSigners();
-  const balance = await hre.ethers.provider.getBalance(deployer.address);
+  const Counter = await ethers.getContractFactory("Counter");
+  console.log("Deploying Counter...");
 
-  console.log("Deployer address:", deployer.address);
-  console.log("Deployer balance:", hre.ethers.formatUnits(balance, "ether"), "LSK");
+  const counter = await Counter.deploy();
 
-  const Counter = await hre.ethers.getContractFactory("Counter");
-
-  const counter = await Counter.deploy({
-    gasPrice: hre.ethers.parseUnits("50", "gwei")
-  });
-
-  console.log("Transaction hash:", counter.deploymentTransaction().hash);
-  console.log("Waiting for deployment confirmation...");
+  console.log("Deployment tx hash:", counter.deploymentTransaction().hash); // <-- NEW LINE
 
   await counter.waitForDeployment();
 
-  console.log("Contract deployed at:", counter.target);
+  console.log("Counter deployed to:", await counter.getAddress());
 }
 
-main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
+main()
+  .then(() => process.exit(0))
+  .catch((error) => {
+    console.error("Deployment failed:", error);
+    process.exit(1);
+  });
